@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les codes de projet -->
+        <record id="seq_projet_code" model="ir.sequence">
+            <field name="name">Code Projet</field>
+            <field name="code">gestion.projet</field>
+            <field name="prefix">PROJ-%(y)s-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les soutenances -->
+        <record id="seq_soutenance_code" model="ir.sequence">
+            <field name="name">Référence Soutenance</field>
+            <field name="code">gestion.soutenance</field>
+            <field name="prefix">SOUT-%(y)s-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les évaluations -->
+        <record id="seq_evaluation_code" model="ir.sequence">
+            <field name="name">Référence Évaluation</field>
+            <field name="code">gestion.evaluation</field>
+            <field name="prefix">EVAL-%(y)s-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Données de démonstration : Étudiants -->
+        <record id="etudiant_1" model="gestion.etudiant">
+            <field name="name">EL MERNISSI</field>
+            <field name="prenom">Karim</field>
+            <field name="cne">P123456789</field>
+            <field name="cin">AA123456</field>
+            <field name="date_naissance">2000-05-15</field>
+            <field name="lieu_naissance">Casablanca</field>
+            <field name="email">karim.elm@ensam.ma</field>
+            <field name="telephone">0612345678</field>
+            <field name="adresse">123 Rue Principale, Casablanca</field>
+            <field name="filiere">informatique</field>
+            <field name="niveau">master2</field>
+            <field name="annee_academique">2024-2025</field>
+            <field name="moyenne_generale">15.5</field>
+            <field name="credit_acquis">120</field>
+            <field name="state">actif</field>
+        </record>
+
+        <record id="etudiant_2" model="gestion.etudiant">
+            <field name="name">ALAOUI</field>
+            <field name="prenom">Fatima</field>
+            <field name="cne">P987654321</field>
+            <field name="cin">BB654321</field>
+            <field name="date_naissance">1999-08-22</field>
+            <field name="lieu_naissance">Rabat</field>
+            <field name="email">fatima.alaoui@ensam.ma</field>
+            <field name="telephone">0623456789</field>
+            <field name="adresse">456 Avenue Mohamed V, Rabat</field>
+            <field name="filiere">genie_civil</field>
+            <field name="niveau">licence3</field>
+            <field name="annee_academique">2024-2025</field>
+            <field name="moyenne_generale">16.2</field>
+            <field name="credit_acquis">90</field>
+            <field name="state">actif</field>
+        </record>
+
+        <!-- Données de démonstration : Enseignants -->
+        <record id="enseignant_1" model="gestion.enseignant">
+            <field name="name">BENNANI</field>
+            <field name="prenom">Dr. Ahmed</field>
+            <field name="cin">CC123456</field>
+            <field name="date_naissance">1975-03-10</field>
+            <field name="lieu_naissance">Fès</field>
+            <field name="email">ahmed.bennani@ensam.ma</field>
+            <field name="telephone">0634567890</field>
+            <field name="adresse">789 Boulevard Hassan II, Fès</field>
+            <field name="grade">professeur</field>
+            <field name="specialite">Intelligence Artificielle</field>
+            <field name="departement">Informatique</field>
+            <field name="bureau">B101</field>
+            <field name="date_embauche">2010-09-01</field>
+            <field name="salaire">25000</field>
+            <field name="state">actif</field>
+        </record>
+
+        <record id="enseignant_2" model="gestion.enseignant">
+            <field name="name">CHERKAOUI</field>
+            <field name="prenom">Dr. Leila</field>
+            <field name="cin">DD654321</field>
+            <field name="date_naissance">1980-11-25</field>
+            <field name="lieu_naissance">Marrakech</field>
+            <field name="email">leila.cherkaoui@ensam.ma</field>
+            <field name="telephone">0645678901</field>
+            <field name="adresse">321 Rue de la Liberté, Marrakech</field>
+            <field name="grade">maitre_conference</field>
+            <field name="specialite">Génie Logiciel</field>
+            <field name="departement">Informatique</field>
+            <field name="bureau">B205</field>
+            <field name="date_embauche">2015-01-15</field>
+            <field name="salaire">18000</field>
+            <field name="state">actif</field>
+        </record>
+
+        <!-- Données de démonstration : Projets -->
+        <record id="projet_1" model="gestion.projet">
+            <field name="code">PROJ-2024-001</field>
+            <field name="name">Système de Gestion des Projets Pédagogiques</field>
+            <field name="description">
+                <![CDATA[
+                <p>Développement d'un système complet de gestion des projets pédagogiques pour les établissements d'enseignement supérieur.</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Gestion des étudiants et enseignants</li>
+                    <li>Suivi des projets et tâches</li>
+                    <li>Planification des soutenances</li>
+                    <li>Évaluation et notation</li>
+                </ul>
+                ]]>
+            </field>
+            <field name="etudiant_id" ref="etudiant_1"/>
+            <field name="enseignant_id" ref="enseignant_1"/>
+            <field name="type_projet">pfe</field>
+            <field name="domaine">informatique</field>
+            <field name="mots_cles">gestion, projets, pédagogique, odoo</field>
+            <field name="date_debut">2024-09-01</field>
+            <field name="date_fin">2025-06-30</field>
+            <field name="state">en_cours</field>
+            <field name="avancement">65</field>
+        </record>
+
+        <record id="projet_2" model="gestion.projet">
+            <field name="code">PROJ-2024-002</field>
+            <field name="name">Conception d'un Pont en Béton Précontraint</field>
+            <field name="description">
+                <![CDATA[
+                <p>Étude et conception d'un pont en béton précontraint pour franchissement de oued.</p>
+                <p><strong>Spécifications :</strong></p>
+                <ul>
+                    <li>Longueur : 150m</li>
+                    <li>Largeur : 12m</li>
+                    <li>Matériau : Béton précontraint</li>
+                </ul>
+                ]]>
+            </field>
+            <field name="etudiant_id" ref="etudiant_2"/>
+            <field name="enseignant_id" ref="enseignant_2"/>
+            <field name="type_projet">pfe</field>
+            <field name="domaine">genie_civil</field>
+            <field name="mots_cles">pont, béton, précontraint, génie civil</field>
+            <field name="date_debut">2024-10-01</field>
+            <field name="date_fin">2025-07-15</field>
+            <field name="state">brouillon</field>
+            <field name="avancement">10</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu principal -->
+        <menuitem id="menu_gestion_projets_root" 
+                  name="Projets Pédagogiques" 
+                  sequence="10"
+                  web_icon="gestion_projets_pedagogiques,static/description/icon.png"/>
+
+        <!-- Sous-menus -->
+        <menuitem id="menu_gestion_etudiants" 
+                  name="Étudiants" 
+                  parent="menu_gestion_projets_root" 
+                  action="action_etudiant"
+                  sequence="10"/>
+
+        <menuitem id="menu_gestion_enseignants" 
+                  name="Enseignants" 
+                  parent="menu_gestion_projets_root" 
+                  action="action_enseignant"
+                  sequence="20"/>
+
+        <menuitem id="menu_gestion_projets" 
+                  name="Projets" 
+                  parent="menu_gestion_projets_root" 
+                  action="action_projet"
+                  sequence="30"/>
+
+        <menuitem id="menu_gestion_taches" 
+                  name="Tâches" 
+                  parent="menu_gestion_projets_root" 
+                  action="action_tache"
+                  sequence="40"/>
+
+        <menuitem id="menu_gestion_soutenances" 
+                  name="Soutenances" 
+                  parent="menu_gestion_projets_root" 
+                  action="action_soutenance"
+                  sequence="50"/>
+
+        <menuitem id="menu_gestion_reporting" 
+                  name="Rapports" 
+                  parent="menu_gestion_projets_root" 
+                  sequence="100">
+            <menuitem id="menu_gestion_reporting_projets" 
+                      name="Statistiques Projets" 
+                      parent="menu_gestion_reporting" 
+                      action="action_report_projets"
+                      sequence="10"/>
+            <menuitem id="menu_gestion_reporting_etudiants" 
+                      name="Statistiques Étudiants" 
+                      parent="menu_gestion_reporting" 
+                      action="action_report_etudiants"
+                      sequence="20"/>
+        </menuitem>
+    </data>
+</odoo>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vue arbre des soutenances -->
+        <record id="view_soutenance_tree" model="ir.ui.view">
+            <field name="name">gestion.soutenance.tree</field>
+            <field name="model">gestion.soutenance</field>
+            <field name="arch" type="xml">
+                <tree string="Soutenances">
+                    <field name="name"/>
+                    <field name="projet_id"/>
+                    <field name="date_soutenance"/>
+                    <field name="salle"/>
+                    <field name="note_finale"/>
+                    <field name="decision" widget="badge"/>
+                    <field name="state" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue recherche des soutenances -->
+        <record id="view_soutenance_search" model="ir.ui.view">
+            <field name="name">gestion.soutenance.search</field>
+            <field name="model">gestion.soutenance</field>
+            <field name="arch" type="xml">
+                <search string="Rechercher Soutenance">
+                    <field name="name"/>
+                    <field name="projet_id"/>
+                    <field name="salle"/>
+                    <separator/>
+                    <filter string="Planifiées" name="planifiee" domain="[('state','=','planifiee')]"/>
+                    <filter string="En Cours" name="en_cours" domain="[('state','=','en_cours')]"/>
+                    <filter string="Terminées" name="terminee" domain="[('state','=','terminee')]"/>
+                    <filter string="Annulées" name="annulee" domain="[('state','=','annulee')]"/>
+                    <separator/>
+                    <group expand="0" string="Regrouper par">
+                        <filter string="État" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Projet" name="group_projet" context="{'group_by': 'projet_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Vue formulaire des soutenances -->
+        <record id="view_soutenance_form" model="ir.ui.view">
+            <field name="name">gestion.soutenance.form</field>
+            <field name="model">gestion.soutenance</field>
+            <field name="arch" type="xml">
+                <form string="Soutenance">
+                    <header>
+                        <button name="action_demarrer" type="object" 
+                                attrs="{'invisible': [('state','!=','planifiee')]}" 
+                                class="btn-primary" string="Démarrer"/>
+                        <button name="action_terminer" type="object" 
+                                attrs="{'invisible': [('state','!=','en_cours')]}" 
+                                class="btn-success" string="Terminer"/>
+                        <button name="action_annuler" type="object" 
+                                attrs="{'invisible': [('state','in',['terminee','annulee'])]}" 
+                                class="btn-danger" string="Annuler"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Référence"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Informations Générales">
+                                <field name="projet_id"/>
+                                <field name="date_soutenance"/>
+                                <field name="duree"/>
+                                <field name="salle"/>
+                            </group>
+                            <group string="Jury">
+                                <field name="president_jury"/>
+                                <field name="jury_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Évaluation">
+                                <group>
+                                    <field name="note_rapport"/>
+                                    <field name="note_presentation"/>
+                                    <field name="note_technique"/>
+                                    <field name="note_finale" readonly="1"/>
+                                    <field name="decision"/>
+                                </group>
+                                <field name="observations" nolabel="1"/>
+                            </page>
+                            <page string="Documents">
+                                <field name="rapport_nom"/>
+                                <field name="rapport_soutenance" filename="rapport_nom"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue calendrier des soutenances -->
+        <record id="view_soutenance_calendar" model="ir.ui.view">
+            <field name="name">gestion.soutenance.calendar</field>
+            <field name="model">gestion.soutenance</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendrier des Soutenances" date_start="date_soutenance" color="state">
+                    <field name="name"/>
+                    <field name="projet_id"/>
+                    <field name="salle"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+    </data>
+</odoo>

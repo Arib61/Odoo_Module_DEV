@@ -1,0 +1,18 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gestion_etudiant_admin,Étudiant (Admin),model_gestion_etudiant,group_gestion_admin,1,1,1,1
+access_gestion_etudiant_enseignant,Étudiant (Enseignant),model_gestion_etudiant,group_gestion_enseignant,1,0,0,0
+access_gestion_etudiant_self,Étudiant (Self),model_gestion_etudiant,group_gestion_etudiant,1,1,0,0
+access_gestion_enseignant_admin,Enseignant (Admin),model_gestion_enseignant,group_gestion_admin,1,1,1,1
+access_gestion_enseignant_enseignant,Enseignant (Self),model_gestion_enseignant,group_gestion_enseignant,1,1,0,0
+access_gestion_enseignant_etudiant,Enseignant (Étudiant),model_gestion_enseignant,group_gestion_etudiant,1,0,0,0
+access_gestion_projet_admin,Projet (Admin),model_gestion_projet,group_gestion_admin,1,1,1,1
+access_gestion_projet_enseignant,Projet (Enseignant),model_gestion_projet,group_gestion_enseignant,1,1,1,0
+access_gestion_projet_etudiant,Projet (Étudiant),model_gestion_projet,group_gestion_etudiant,1,1,0,0
+access_gestion_tache_admin,Tâche (Admin),model_gestion_tache,group_gestion_admin,1,1,1,1
+access_gestion_tache_enseignant,Tâche (Enseignant),model_gestion_tache,group_gestion_enseignant,1,1,1,0
+access_gestion_tache_etudiant,Tâche (Étudiant),model_gestion_tache,group_gestion_etudiant,1,1,1,0
+access_gestion_soutenance_admin,Soutenance (Admin),model_gestion_soutenance,group_gestion_admin,1,1,1,1
+access_gestion_soutenance_enseignant,Soutenance (Enseignant),model_gestion_soutenance,group_gestion_enseignant,1,1,1,0
+access_gestion_soutenance_etudiant,Soutenance (Étudiant),model_gestion_soutenance,group_gestion_etudiant,1,0,0,0
+access_gestion_evaluation_admin,Évaluation (Admin),model_gestion_evaluation,group_gestion_admin,1,1,1,1
+access_gestion_evaluation_enseignant,Évaluation (Enseignant),model_gestion_evaluation,group_gestion_enseignant,1,1,1,0

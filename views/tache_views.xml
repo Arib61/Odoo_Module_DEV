@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vue arbre des tâches -->
+        <record id="view_tache_tree" model="ir.ui.view">
+            <field name="name">gestion.tache.tree</field>
+            <field name="model">gestion.tache</field>
+            <field name="arch" type="xml">
+                <tree string="Tâches">
+                    <field name="name"/>
+                    <field name="projet_id"/>
+                    <field name="etudiant_id"/>
+                    <field name="date_debut"/>
+                    <field name="date_fin"/>
+                    <field name="priorite" widget="priority"/>
+                    <field name="avancement" widget="progressbar"/>
+                    <field name="state" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue recherche des tâches -->
+        <record id="view_tache_search" model="ir.ui.view">
+            <field name="name">gestion.tache.search</field>
+            <field name="model">gestion.tache</field>
+            <field name="arch" type="xml">
+                <search string="Rechercher Tâche">
+                    <field name="name"/>
+                    <field name="projet_id"/>
+                    <field name="etudiant_id"/>
+                    <separator/>
+                    <filter string="À Faire" name="a_faire" domain="[('state','=','a_faire')]"/>
+                    <filter string="En Cours" name="en_cours" domain="[('state','=','en_cours')]"/>
+                    <filter string="Terminées" name="termine" domain="[('state','=','termine')]"/>
+                    <filter string="En Retard" name="retard" domain="[('state','=','retard')]"/>
+                    <separator/>
+                    <group expand="0" string="Regrouper par">
+                        <filter string="Projet" name="group_projet" context="{'group_by': 'projet_id'}"/>
+                        <filter string="État" name="group_state" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Vue formulaire des tâches -->
+        <record id="view_tache_form" model="ir.ui.view">
+            <field name="name">gestion.tache.form</field>
+            <field name="model">gestion.tache</field>
+            <field name="arch" type="xml">
+                <form string="Tâche">
+                    <header>
+                        <button name="action_demarrer" type="object" 
+                                attrs="{'invisible': [('state','!=','a_faire')]}" 
+                                class="btn-primary" string="Démarrer"/>
+                        <button name="action_terminer" type="object" 
+                                attrs="{'invisible': [('state','!=','en_cours')]}" 
+                                class="btn-success" string="Terminer"/>
+                        <button name="action_retard" type="object" 
+                                attrs="{'invisible': [('state','!=','en_cours')]}" 
+                                class="btn-warning" string="Marquer en Retard"/>
+                        <button name="action_annuler" type="object" 
+                                class="btn-danger" string="Annuler"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Titre de la tâche"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Informations Générales">
+                                <field name="projet_id"/>
+                                <field name="etudiant_id"/>
+                                <field name="description" nolabel="1"/>
+                            </group>
+                            <group string="Planification">
+                                <field name="date_debut"/>
+                                <field name="date_fin"/>
+                                <field name="date_limite"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Détails">
+                                <field name="priorite"/>
+                                <field name="difficulte"/>
+                                <field name="avancement"/>
+                                <field name="state"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue kanban des tâches -->
+        <record id="view_tache_kanban" model="ir.ui.view">
+            <field name="name">gestion.tache.kanban</field>
+            <field name="model">gestion.tache</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="avancement"/>
+                    <field name="priorite"/>
+                    <field name="date_fin"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <field name="priorite" widget="badge"/>
+                                    </div>
+                                    <div>
+                                        <field name="avancement" widget="progressbar"/>
+                                    </div>
+                                    <div>
+                                        <field name="state" widget="badge"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vue arbre des évaluations -->
+        <record id="view_evaluation_tree" model="ir.ui.view">
+            <field name="name">gestion.evaluation.tree</field>
+            <field name="model">gestion.evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Évaluations">
+                    <field name="name"/>
+                    <field name="projet_id"/>
+                    <field name="etudiant_id"/>
+                    <field name="enseignant_id"/>
+                    <field name="date_evaluation"/>
+                    <field name="critere"/>
+                    <field name="note"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue recherche des évaluations -->
+        <record id="view_evaluation_search" model="ir.ui.view">
+            <field name="name">gestion.evaluation.search</field>
+            <field name="model">gestion.evaluation</field>
+            <field name="arch" type="xml">
+                <search string="Rechercher Évaluation">
+                    <field name="name"/>
+                    <field name="projet_id"/>
+                    <field name="etudiant_id"/>
+                    <field name="enseignant_id"/>
+                    <separator/>
+                    <group expand="0" string="Regrouper par">
+                        <filter string="Projet" name="group_projet" context="{'group_by': 'projet_id'}"/>
+                        <filter string="Critère" name="group_critere" context="{'group_by': 'critere'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Vue formulaire des évaluations -->
+        <record id="view_evaluation_form" model="ir.ui.view">
+            <field name="name">gestion.evaluation.form</field>
+            <field name="model">gestion.evaluation</field>
+            <field name="arch" type="xml">
+                <form string="Évaluation">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Référence"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Informations Générales">
+                                <field name="projet_id"/>
+                                <field name="etudiant_id"/>
+                                <field name="enseignant_id"/>
+                                <field name="date_evaluation"/>
+                                <field name="critere"/>
+                            </group>
+                            <group string="Évaluation">
+                                <field name="note"/>
+                                <field name="commentaire" nolabel="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

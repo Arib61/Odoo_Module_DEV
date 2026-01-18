@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action pour les étudiants -->
+        <record id="action_etudiant" model="ir.actions.act_window">
+            <field name="name">Étudiants</field>
+            <field name="res_model">gestion.etudiant</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="search_view_id" ref="view_etudiant_search"/>
+            <field name="context">{'search_default_actif': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Gestion des étudiants
+                </p>
+            </field>
+        </record>
+
+        <!-- Action pour les enseignants -->
+        <record id="action_enseignant" model="ir.actions.act_window">
+            <field name="name">Enseignants</field>
+            <field name="res_model">gestion.enseignant</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="search_view_id" ref="view_enseignant_search"/>
+            <field name="context">{'search_default_actif': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Gestion des enseignants
+                </p>
+            </field>
+        </record>
+
+        <!-- Action pour les projets -->
+        <record id="action_projet" model="ir.actions.act_window">
+            <field name="name">Projets</field>
+            <field name="res_model">gestion.projet</field>
+            <field name="view_mode">tree,form,kanban,calendar,graph,pivot</field>
+            <field name="search_view_id" ref="view_projet_search"/>
+            <field name="context">{'search_default_en_cours': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Gestion des projets pédagogiques
+                </p>
+            </field>
+        </record>
+
+        <!-- Action pour les tâches -->
+        <record id="action_tache" model="ir.actions.act_window">
+            <field name="name">Tâches</field>
+            <field name="res_model">gestion.tache</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="search_view_id" ref="view_tache_search"/>
+            <field name="context">{'search_default_a_faire': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Gestion des tâches des projets
+                </p>
+            </field>
+        </record>
+
+        <!-- Action pour les soutenances -->
+        <record id="action_soutenance" model="ir.actions.act_window">
+            <field name="name">Soutenances</field>
+            <field name="res_model">gestion.soutenance</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="search_view_id" ref="view_soutenance_search"/>
+            <field name="context">{'search_default_planifiee': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Planification des soutenances
+                </p>
+            </field>
+        </record>
+
+        <!-- Action pour les rapports de projets -->
+        <record id="action_report_projets" model="ir.actions.act_window">
+            <field name="name">Rapport des Projets</field>
+            <field name="res_model">gestion.projet</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="view_id" ref="view_projet_pivot"/>
+            <field name="context">
+                {
+                    'pivot_measures': ['avancement', 'note'],
+                    'graph_measure': 'id',
+                    'graph_mode': 'bar',
+                    'search_default_group_state': 1
+                }
+            </field>
+        </record>
+
+        <!-- Action pour les rapports d'étudiants -->
+        <record id="action_report_etudiants" model="ir.actions.act_window">
+            <field name="name">Rapport des Étudiants</field>
+            <field name="res_model">gestion.etudiant</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="context">
+                {
+                    'pivot_measures': ['projet_count'],
+                    'pivot_row_groupby': ['filiere', 'niveau'],
+                    'search_default_group_filiere': 1
+                }
+            </field>
+        </record>
+    </data>
+</odoo>

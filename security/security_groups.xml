@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Définition des groupes -->
+        <record id="group_gestion_admin" model="res.groups">
+            <field name="name">Administrateur Projets Pédagogiques</field>
+            <field name="category_id" ref="base.module_category_education"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_gestion_enseignant" model="res.groups">
+            <field name="name">Enseignant</field>
+            <field name="category_id" ref="base.module_category_education"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_gestion_etudiant" model="res.groups">
+            <field name="name">Étudiant</field>
+            <field name="category_id" ref="base.module_category_education"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+        </record>
+
+        <!-- Enregistrement des modèles -->
+        <record id="model_gestion_etudiant" model="ir.model">
+            <field name="model">gestion.etudiant</field>
+            <field name="name">Étudiant</field>
+            <field name="inherit">[]</field>
+            <field name="state">base</field>
+        </record>
+
+        <record id="model_gestion_enseignant" model="ir.model">
+            <field name="model">gestion.enseignant</field>
+            <field name="name">Enseignant</field>
+            <field name="inherit">[]</field>
+            <field name="state">base</field>
+        </record>
+
+        <record id="model_gestion_projet" model="ir.model">
+            <field name="model">gestion.projet</field>
+            <field name="name">Projet Pédagogique</field>
+            <field name="inherit">[]</field>
+            <field name="state">base</field>
+        </record>
+
+        <record id="model_gestion_tache" model="ir.model">
+            <field name="model">gestion.tache</field>
+            <field name="name">Tâche</field>
+            <field name="inherit">[]</field>
+            <field name="state">base</field>
+        </record>
+
+        <record id="model_gestion_soutenance" model="ir.model">
+            <field name="model">gestion.soutenance</field>
+            <field name="name">Soutenance</field>
+            <field name="inherit">[]</field>
+            <field name="state">base</field>
+        </record>
+
+        <record id="model_gestion_evaluation" model="ir.model">
+            <field name="model">gestion.evaluation</field>
+            <field name="name">Évaluation</field>
+            <field name="inherit">[]</field>
+            <field name="state">base</field>
+        </record>
+    </data>
+</odoo>

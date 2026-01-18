@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Rapport de projet -->
+        <record id="report_projet_details" model="ir.actions.report">
+            <field name="name">Fiche Projet</field>
+            <field name="model">gestion.projet</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">gestion_projets_pedagogiques.report_projet</field>
+            <field name="print_report_name">'Fiche Projet - %s' % (object.code)</field>
+            <field name="binding_model_id" ref="model_gestion_projet"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- Template du rapport -->
+        <template id="report_projet">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <div class="header">
+                            <h1>ÉCOLE NATIONALE DES SCIENCES APPLIQUÉES</h1>
+                            <h3>Fiche de Projet Pédagogique</h3>
+                            <hr/>
+                        </div>
+                        <div class="content">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th width="30%">Code Projet</th>
+                                    <td><span t-field="doc.code"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Titre</th>
+                                    <td><span t-field="doc.name"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Étudiant</th>
+                                    <td><span t-field="doc.etudiant_id.display_name"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Encadrant</th>
+                                    <td><span t-field="doc.enseignant_id.display_name"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Type</th>
+                                    <td>
+                                        <t t-set="type_dict" t-value="{'pfe': 'Projet de Fin d\'Études', 'memoire': 'Mémoire', 'stage': 'Rapport de Stage', 'recherche': 'Projet de Recherche', 'technique': 'Projet Technique'}"/>
+                                        <t t-esc="type_dict.get(doc.type_projet, doc.type_projet)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Dates</th>
+                                    <td>Du <span t-field="doc.date_debut"/> au <span t-field="doc.date_fin"/></td>
+                                </tr>
+                                <tr>
+                                    <th>État</th>
+                                    <td>
+                                        <t t-set="state_dict" t-value="{'brouillon': 'Brouillon', 'en_cours': 'En Cours', 'soutenu': 'Soutenu', 'valide': 'Validé', 'refuse': 'Refusé', 'archive': 'Archivé'}"/>
+                                        <t t-esc="state_dict.get(doc.state, doc.state)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Note</th>
+                                    <td><t t-esc="doc.note if doc.note else 'Non évalué'"/></td>
+                                </tr>
+                            </table>
+                            <div class="description">
+                                <h4>Description</h4>
+                                <div t-field="doc.description"/>
+                            </div>
+                            <div class="taches">
+                                <h4>Tâches</h4>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Tâche</th>
+                                            <th>Dates</th>
+                                            <th>État</th>
+                                            <th>Avancement</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.tache_ids" t-as="tache">
+                                            <tr>
+                                                <td><span t-field="tache.name"/></td>
+                                                <td>Du <span t-field="tache.date_debut"/> au <span t-field="tache.date_fin"/></td>
+                                                <td>
+                                                    <t t-set="tache_state_dict" t-value="{'a_faire': 'À Faire', 'en_cours': 'En Cours', 'termine': 'Terminé', 'retard': 'En Retard', 'annule': 'Annulé'}"/>
+                                                    <t t-esc="tache_state_dict.get(tache.state, tache.state)"/>
+                                                </td>
+                                                <td><span t-field="tache.avancement"/>%</td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="signature">
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <p>Signature de l'étudiant</p>
+                                        <p>_________________________</p>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <p>Signature de l'encadrant</p>
+                                        <p>_________________________</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
